@@ -22,7 +22,6 @@ var (
 
 	showRemoteReadURL = flag.Bool("remoteRead.showURL", false, "Whether to show -remoteRead.url in the exported metrics. "+
 		"It is hidden by default, since it can contain sensitive info such as auth key")
-	showRemoteReadHeaders = flag.Bool("remoteRead.showHeaders", false, "Whether to show -remoteRead.headers in logs and metrics. It is hidden by default, since it may contain sensitive info")
 
 	headers = flag.String("remoteRead.headers", "", "Optional HTTP headers to send with each request to the corresponding -remoteRead.url. "+
 		"For example, -remoteRead.headers='My-Auth:foobar' would send 'My-Auth: foobar' HTTP header with every request to the corresponding -remoteRead.url. "+
@@ -58,9 +57,6 @@ var (
 func InitSecretFlags() {
 	if !*showRemoteReadURL {
 		flagutil.RegisterSecretFlag("remoteRead.url")
-	}
-	if !*showRemoteReadHeaders {
-		flagutil.RegisterSecretFlag("remoteRead.headers")
 	}
 }
 

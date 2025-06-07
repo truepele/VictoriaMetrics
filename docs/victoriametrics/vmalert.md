@@ -1119,8 +1119,6 @@ The shortlist of configuration flags is the following:
      Whether to disable adding 'step' param in instant queries to the configured -datasource.url and -remoteRead.url. Only valid for prometheus datasource. This might be useful when using vmalert with datasources that do not support 'step' param for instant queries, like Google Managed Prometheus. It is not recommended to enable this flag if you use vmalert with VictoriaMetrics.
   -datasource.headers string
      Optional HTTP extraHeaders to send with each request to the corresponding -datasource.url. For example, -datasource.headers='My-Auth:foobar' would send 'My-Auth: foobar' HTTP header with every request to the corresponding -datasource.url. Multiple headers must be delimited by '^^': -datasource.headers='header1:value1^^header2:value2'
-  -datasource.showHeaders
-     Whether to show -datasource.headers in logs and on /metrics page. Hidden by default, since it may contain sensitive info
   -datasource.idleConnTimeout duration
      Defines a duration for idle (keep-alive connections) to exist. Consider setting this value less than "-http.idleConnTimeout". It must prevent possible "write: broken pipe" and "read: connection reset by peer" errors. (default 50s)
   -datasource.maxIdleConnections int
@@ -1299,8 +1297,6 @@ The shortlist of configuration flags is the following:
      Optional HTTP headers to send with each request to the corresponding -notifier.url. For example, -remoteWrite.headers='My-Auth:foobar' would send 'My-Auth: foobar' HTTP header with every request to the corresponding -notifier.url. Multiple headers must be delimited by '^^': -notifier.headers='header1:value1^^header2:value2,header3:value3'
      Supports an array of values separated by comma or specified via multiple flags.
      Value can contain comma inside single-quoted or double-quoted string, {}, [] and () braces.
-  -notifier.showHeaders
-     Whether to show -notifier.headers in logs and on /metrics page. Hidden by default, since it may contain sensitive info
   -notifier.oauth2.clientID array
      Optional OAuth2 clientID to use for -notifier.url. If multiple args are set, then they are applied independently for the corresponding -notifier.url
      Supports an array of values separated by comma or specified via multiple flags.
@@ -1403,8 +1399,6 @@ The shortlist of configuration flags is the following:
      Whether to disable automatic appending of '/api/v1/query' or '/select/logsql/stats_query' path to the configured -datasource.url and -remoteRead.url
   -remoteRead.headers string
      Optional HTTP headers to send with each request to the corresponding -remoteRead.url. For example, -remoteRead.headers='My-Auth:foobar' would send 'My-Auth: foobar' HTTP header with every request to the corresponding -remoteRead.url. Multiple headers must be delimited by '^^': -remoteRead.headers='header1:value1^^header2:value2'
-  -remoteRead.showHeaders
-     Whether to show -remoteRead.headers in logs and on /metrics page. Hidden by default, since it may contain sensitive info
   -remoteRead.idleConnTimeout duration
      Defines a duration for idle (keep-alive connections) to exist. Consider settings this value less to the value of "-http.idleConnTimeout". It must prevent possible "write: broken pipe" and "read: connection reset by peer" errors. (default 50s)
   -remoteRead.lookback duration
@@ -1453,8 +1447,6 @@ The shortlist of configuration flags is the following:
      Defines interval of flushes to remote write endpoint (default 2s)
   -remoteWrite.headers string
      Optional HTTP headers to send with each request to the corresponding -remoteWrite.url. For example, -remoteWrite.headers='My-Auth:foobar' would send 'My-Auth: foobar' HTTP header with every request to the corresponding -remoteWrite.url. Multiple headers must be delimited by '^^': -remoteWrite.headers='header1:value1^^header2:value2'
-  -remoteWrite.showHeaders
-     Whether to show -remoteWrite.headers in logs and on /metrics page. Hidden by default, since it may contain sensitive info
   -remoteWrite.idleConnTimeout duration
      Defines a duration for idle (keep-alive connections) to exist. Consider settings this value less to the value of "-http.idleConnTimeout". It must prevent possible "write: broken pipe" and "read: connection reset by peer" errors. (default 50s)
   -remoteWrite.maxBatchSize int

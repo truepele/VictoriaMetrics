@@ -20,8 +20,7 @@ var (
 		"List all Alertmanager URLs if it runs in the cluster mode to ensure high availability.")
 	showNotifierURL = flag.Bool("notifier.showURL", false, "Whether to avoid stripping sensitive information such as passwords from URL in log messages or UI for -notifier.url. "+
 		"It is hidden by default, since it can contain sensitive info such as auth key")
-	showNotifierHeaders = flag.Bool("notifier.showHeaders", false, "Whether to show -notifier.headers in logs and metrics. It is hidden by default, since it may contain sensitive info")
-	blackHole           = flag.Bool("notifier.blackhole", false, "Whether to blackhole alerting notifications. "+
+	blackHole = flag.Bool("notifier.blackhole", false, "Whether to blackhole alerting notifications. "+
 		"Enable this flag if you want vmalert to evaluate alerting rules without sending any notifications to external receivers (eg. alertmanager). "+
 		"-notifier.url, -notifier.config and -notifier.blackhole are mutually exclusive.")
 
@@ -139,9 +138,6 @@ func Init(gen AlertURLGenerator, extLabels map[string]string, extURL string) (fu
 func InitSecretFlags() {
 	if !*showNotifierURL {
 		flagutil.RegisterSecretFlag("notifier.url")
-	}
-	if !*showNotifierHeaders {
-		flagutil.RegisterSecretFlag("notifier.headers")
 	}
 }
 

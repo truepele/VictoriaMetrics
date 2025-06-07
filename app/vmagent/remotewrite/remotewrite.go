@@ -63,8 +63,7 @@ var (
 		"Default value depends on the number of available CPU cores. It should work fine in most cases since it minimizes resource usage")
 	showRemoteWriteURL = flag.Bool("remoteWrite.showURL", false, "Whether to show -remoteWrite.url in the exported metrics. "+
 		"It is hidden by default, since it can contain sensitive info such as auth key")
-	showRemoteWriteHeaders = flag.Bool("remoteWrite.showHeaders", false, "Whether to show -remoteWrite.headers in logs and the exported metrics. It is hidden by default, since it may contain sensitive info")
-	maxPendingBytesPerURL  = flagutil.NewArrayBytes("remoteWrite.maxDiskUsagePerURL", 0, "The maximum file-based buffer size in bytes at -remoteWrite.tmpDataPath "+
+	maxPendingBytesPerURL = flagutil.NewArrayBytes("remoteWrite.maxDiskUsagePerURL", 0, "The maximum file-based buffer size in bytes at -remoteWrite.tmpDataPath "+
 		"for each -remoteWrite.url. When buffer size reaches the configured maximum, then old data is dropped when adding new data to the buffer. "+
 		"Buffered data is stored in ~500MB chunks. It is recommended to set the value for this flag to a multiple of the block size 500MB. "+
 		"Disk usage is unlimited if the value is set to 0")
@@ -140,9 +139,6 @@ func InitSecretFlags() {
 	if !*showRemoteWriteURL {
 		// remoteWrite.url can contain authentication codes, so hide it at `/metrics` output.
 		flagutil.RegisterSecretFlag("remoteWrite.url")
-	}
-	if !*showRemoteWriteHeaders {
-		flagutil.RegisterSecretFlag("remoteWrite.headers")
 	}
 }
 
