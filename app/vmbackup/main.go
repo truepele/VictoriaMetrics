@@ -48,6 +48,7 @@ func main() {
 	flagutil.RegisterSecretFlag("snapshot.createURL")
 	flagutil.RegisterSecretFlag("snapshot.deleteURL")
 	envflag.Parse()
+	flagutil.InitSecretFlags()
 	buildinfo.Init()
 	logger.Init()
 

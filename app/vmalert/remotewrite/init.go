@@ -20,6 +20,7 @@ var (
 		"then the alerts state will be written to http://127.0.0.1:8428/api/v1/write . See also -remoteWrite.disablePathAppend, '-remoteWrite.showURL'.")
 	showRemoteWriteURL = flag.Bool("remoteWrite.showURL", false, "Whether to show -remoteWrite.url in the exported metrics. "+
 		"It is hidden by default, since it can contain sensitive info such as auth key")
+	showRemoteWriteHeaders = flag.Bool("remoteWrite.showHeaders", false, "Whether to show -remoteWrite.headers in logs and metrics. It is hidden by default, since it may contain sensitive info")
 
 	headers = flag.String("remoteWrite.headers", "", "Optional HTTP headers to send with each request to the corresponding -remoteWrite.url. "+
 		"For example, -remoteWrite.headers='My-Auth:foobar' would send 'My-Auth: foobar' HTTP header with every request to the corresponding -remoteWrite.url. "+
@@ -60,6 +61,9 @@ var (
 func InitSecretFlags() {
 	if !*showRemoteWriteURL {
 		flagutil.RegisterSecretFlag("remoteWrite.url")
+	}
+	if !*showRemoteWriteHeaders {
+		flagutil.RegisterSecretFlag("remoteWrite.headers")
 	}
 }
 

@@ -62,6 +62,7 @@ func main() {
 	flag.CommandLine.SetOutput(os.Stdout)
 	flag.Usage = usage
 	envflag.Parse()
+	flagutil.InitSecretFlags()
 	buildinfo.Init()
 	logger.Init()
 

@@ -1,8 +1,6 @@
 package flagutil
 
-import (
-	"strings"
-)
+import "strings"
 
 // RegisterSecretFlag registers flagName as secret.
 //
@@ -15,7 +13,10 @@ func RegisterSecretFlag(flagName string) {
 	secretFlags[lname] = true
 }
 
-var secretFlags = make(map[string]bool)
+var (
+	secretFlags     = make(map[string]bool)
+	secretFlagsList = NewArrayString("secret.flags", "Comma-separated list of flag names with secret values. Values for these flags are hidden in logs and on /metrics page")
+)
 
 // IsSecretFlag returns true of s contains flag name with secret value, which shouldn't be exposed.
 func IsSecretFlag(s string) bool {
@@ -23,4 +24,13 @@ func IsSecretFlag(s string) bool {
 		return true
 	}
 	return secretFlags[s]
+}
+
+// InitSecretFlags registers flags from -secret.flags as secrets.
+//
+// It must be called after flag.Parse and before logging initialization.
+func InitSecretFlags() {
+	for _, f := range *secretFlagsList {
+		RegisterSecretFlag(f)
+	}
 }

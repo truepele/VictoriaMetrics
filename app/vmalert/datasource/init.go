@@ -21,6 +21,7 @@ var (
 	appendTypePrefix  = flag.Bool("datasource.appendTypePrefix", false, "Whether to add type prefix to -datasource.url based on the query type. Set to true if sending different query types to the vmselect URL.")
 	showDatasourceURL = flag.Bool("datasource.showURL", false, "Whether to avoid stripping sensitive information such as auth headers or passwords from URLs in log messages or UI and exported metrics. "+
 		"It is hidden by default, since it can contain sensitive info such as auth key")
+	showDatasourceHeaders = flag.Bool("datasource.showHeaders", false, "Whether to show -datasource.headers in logs and metrics. It is hidden by default, since it may contain sensitive info")
 
 	headers = flag.String("datasource.headers", "", "Optional HTTP extraHeaders to send with each request to the corresponding -datasource.url. "+
 		"For example, -datasource.headers='My-Auth:foobar' would send 'My-Auth: foobar' HTTP header with every request to the corresponding -datasource.url. "+
@@ -62,6 +63,9 @@ var (
 func InitSecretFlags() {
 	if !*showDatasourceURL {
 		flagutil.RegisterSecretFlag("datasource.url")
+	}
+	if !*showDatasourceHeaders {
+		flagutil.RegisterSecretFlag("datasource.headers")
 	}
 }
 
